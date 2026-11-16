@@ -1,0 +1,8 @@
+C:\Users\emmal\OneDrive\Projects\StardewMod\StardewComforts\obj\Debug\net6.0\StardewComforts.csproj.AssemblyReference.cache
+C:\Users\emmal\OneDrive\Projects\StardewMod\StardewComforts\obj\Debug\net6.0\StardewComforts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\emmal\OneDrive\Projects\StardewMod\StardewComforts\obj\Debug\net6.0\StardewComforts.AssemblyInfoInputs.cache
+C:\Users\emmal\OneDrive\Projects\StardewMod\StardewComforts\obj\Debug\net6.0\StardewComforts.AssemblyInfo.cs
+C:\Users\emmal\OneDrive\Projects\StardewMod\StardewComforts\obj\Debug\net6.0\StardewComforts.csproj.CoreCompileInputs.cache
+C:\Users\emmal\OneDrive\Projects\StardewMod\StardewComforts\bin\Debug\net6.0\StardewComforts.deps.json
+C:\Users\emmal\OneDrive\Projects\StardewMod\StardewComforts\bin\Debug\net6.0\StardewComforts.dll
+C:\Users\emmal\OneDrive\Projects\StardewMod\StardewComforts\obj\Debug\net6.0\StardewComforts.dll

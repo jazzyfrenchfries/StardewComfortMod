@@ -1,0 +1,11 @@
+
+{
+    "Name": "Stardew Comforts",
+    "Author": "Jazzyfrenchfries",
+    "Version": "1.0.0",
+    "Description": "A collection of small quality-of-life improvements to make life on the farm a little easier.",
+    "UniqueID": "jazzyfrenchfries.StardewComforts",
+    "EntryDll": "StardewComforts.dll",
+    "MinimumApiVersion": "4.0.0",
+    "UpdateKeys": []
+}

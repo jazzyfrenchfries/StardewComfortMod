@@ -9,15 +9,19 @@ using StardewComforts.Features;
 namespace StardewMod;
 
 public class ModEntry : Mod
-{
-    private EnergyReminder energyReminder;
+{   
     private ModConfig Config = new();
+    private EnergyReminder energyReminder;
+    private BirthdayReminder birthdayReminder;
+    
 
     public override void Entry(IModHelper helper)
     {
         Config = helper.ReadConfig<ModConfig>();
         energyReminder = new EnergyReminder(helper,Config);
+        birthdayReminder = new BirthdayReminder(helper, Config);
         energyReminder.Initialize();
+        birthdayReminder.Initialize();
         Monitor.Log("Stardew Comforts loaded!", LogLevel.Info);
         helper.Events.GameLoop.GameLaunched += OnGameLaunched;
       

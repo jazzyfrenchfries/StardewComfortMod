@@ -13,15 +13,18 @@ public class ModEntry : Mod
     private ModConfig Config = new();
     private EnergyReminder energyReminder;
     private BirthdayReminder birthdayReminder;
+    private FestivalReminder festivalReminder;
     
 
     public override void Entry(IModHelper helper)
     {
         Config = helper.ReadConfig<ModConfig>();
         energyReminder = new EnergyReminder(helper,Config);
-        birthdayReminder = new BirthdayReminder(helper, Config);
+        birthdayReminder = new BirthdayReminder(helper,Config, Monitor);
+        festivalReminder = new FestivalReminder(helper,Config, Monitor);
         energyReminder.Initialize();
         birthdayReminder.Initialize();
+        festivalReminder.Initialize();
         Monitor.Log("Stardew Comforts loaded!", LogLevel.Info);
         helper.Events.GameLoop.GameLaunched += OnGameLaunched;
       

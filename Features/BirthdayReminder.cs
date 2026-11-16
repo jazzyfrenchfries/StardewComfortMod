@@ -9,13 +9,17 @@ public class BirthdayReminder
 {
     private readonly IModHelper helper;
     private readonly ModConfig Config;
+    private readonly IMonitor Monitor;
+    private bool hasNotified = false;
 
-    public BirthdayReminder(IModHelper helper, ModConfig Config) {
+    public BirthdayReminder(IModHelper helper, ModConfig Config, IMonitor Monitor) {
         this.helper = helper;
         this.Config = Config;
+        this.Monitor = Monitor;
     }
     private void OnDayStarted(object? sender, EventArgs e) {
         Config.EnableBirthdayReminders = true;
+        hasNotified = false;
         if(!Context.IsWorldReady) {
             return;
         }
@@ -25,9 +29,13 @@ public class BirthdayReminder
         foreach (var character in characters) {
             int characterBirthday =  (Array.IndexOf(seasons, character.Value.BirthSeason) *28)+ (character.Value.BirthDay -1);
             int daysUntilBirthday = characterBirthday - currentDay;
-            if(daysUntilBirthday == Config.DaysBeforeReminder) {
+            if(daysUntilBirthday < 0) {
+                daysUntilBirthday += 112;
+            }
+            if(daysUntilBirthday == Config.DaysBeforeReminder && !hasNotified) {
                 Game1.addHUDMessage(
                     new HUDMessage($"It is {character.Key} 's birthday, Give them a present!", HUDMessage.newQuest_type));
+                hasNotified = true;
             }
         }
        

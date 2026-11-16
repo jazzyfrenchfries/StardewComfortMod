@@ -13,12 +13,16 @@ public class FestivalReminder
 {
     private readonly IModHelper helper;
     private readonly ModConfig Config;
-    public FestivalReminder(IModHelper helper, ModConfig Config) {
+    private readonly IMonitor Monitor;
+    private bool hasNotified = false;
+    public FestivalReminder(IModHelper helper, ModConfig Config, IMonitor Monitor) {
         this.helper = helper;
         this.Config = Config;
+        this.Monitor = Monitor;
     }
     private void OnDayStarted(object? sender, EventArgs e) {
         Config.EnableFestivalReminders = true;
+        hasNotified = false;
         if(!Config.EnableFestivalReminders || !Context.IsWorldReady) {
             return;
         }
@@ -36,17 +40,23 @@ public class FestivalReminder
                     break;
                 }
             }
+            
             string festivalSeason = festivalDate.Substring(0, dayStart);
             string festivalDayText = festivalDate.Substring(dayStart);
             int festivalDay = int.Parse(festivalDayText);
             int festivalSeasonIndex = Array.IndexOf(seasons, festivalSeason);
             int festivalDateInYear = (festivalSeasonIndex* 28) + (festivalDay- 1);
             int daysUntilFestival = festivalDateInYear - currentDay;
-            if (daysUntilFestival == Config.DaysBeforeReminder) {
+            if(daysUntilFestival < 0) {
+                daysUntilFestival += 112;
+            }
+            if (daysUntilFestival == Config.DaysBeforeReminder && !hasNotified) {
                 Game1.addHUDMessage(new HUDMessage(
                     $"{festivalName} is {daysUntilFestival} days away!",
                     HUDMessage.newQuest_type));
+                hasNotified = true;
             }
+            
         }
     }
     public void Initialize() {

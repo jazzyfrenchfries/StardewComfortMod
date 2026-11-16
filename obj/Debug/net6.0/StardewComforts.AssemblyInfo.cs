@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StardewComforts")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+601892f1d69b26334abe76e254ca82c502b1fe1a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5848c0ac1c99f074b61834be389879c3f633dce4")]
 [assembly: System.Reflection.AssemblyProductAttribute("StardewComforts")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StardewComforts")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

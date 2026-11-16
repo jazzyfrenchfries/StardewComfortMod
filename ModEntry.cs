@@ -4,51 +4,24 @@ using StardewComforts;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
+using StardewComforts.Features;
 
 namespace StardewMod;
 
 public class ModEntry : Mod
 {
-    private bool hasNotified = false;
+    private EnergyReminder energyReminder;
     private ModConfig Config = new();
 
     public override void Entry(IModHelper helper)
     {
         Config = helper.ReadConfig<ModConfig>();
+        energyReminder = new EnergyReminder(helper,Config);
+        energyReminder.Initialize();
         Monitor.Log("Stardew Comforts loaded!", LogLevel.Info);
-
-        helper.Events.GameLoop.UpdateTicked += OnUpdateTicked;
         helper.Events.GameLoop.GameLaunched += OnGameLaunched;
       
     }
-
-    private void OnUpdateTicked(object? sender, EventArgs e)
-    {
-        if (!Context.IsWorldReady)
-        {
-            return;
-        }
-
-        float currentEnergy = Game1.player.Stamina;
-        float maxEnergy = Game1.player.MaxStamina;
-
-        float energyPercentage = (currentEnergy / maxEnergy) * 100;
-
-        if (energyPercentage <= 25 && !hasNotified)
-        {
-            Game1.addHUDMessage(
-                new HUDMessage("Your energy is getting low!", HUDMessage.newQuest_type)
-            );
-
-            hasNotified = true;
-        }
-
-        if (energyPercentage > 25)
-        {
-            hasNotified = false;
-        }
-    }
-
     private void OnGameLaunched(object? sender, GameLaunchedEventArgs e) {
         var configMenu = Helper.ModRegistry.GetApi<IGenericModConfigMenuApi>(
             "spacechase0.GenericModConfigMenu");

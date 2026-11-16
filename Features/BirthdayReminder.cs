@@ -24,7 +24,8 @@ public class BirthdayReminder
         var characters = Game1.characterData;
         foreach (var character in characters) {
             int characterBirthday =  (Array.IndexOf(seasons, character.Value.BirthSeason) *28)+ (character.Value.BirthDay -1);
-            if(characterBirthday == currentDay) {
+            int daysUntilBirthday = characterBirthday - currentDay;
+            if(daysUntilBirthday == Config.DaysBeforeReminder) {
                 Game1.addHUDMessage(
                     new HUDMessage($"It is {character.Key} 's birthday, Give them a present!", HUDMessage.newQuest_type));
             }

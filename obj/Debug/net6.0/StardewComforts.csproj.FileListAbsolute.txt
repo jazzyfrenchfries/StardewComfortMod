@@ -6,3 +6,4 @@ C:\Users\emmal\OneDrive\Projects\StardewMod\StardewComforts\obj\Debug\net6.0\Sta
 C:\Users\emmal\OneDrive\Projects\StardewMod\StardewComforts\bin\Debug\net6.0\StardewComforts.deps.json
 C:\Users\emmal\OneDrive\Projects\StardewMod\StardewComforts\bin\Debug\net6.0\StardewComforts.dll
 C:\Users\emmal\OneDrive\Projects\StardewMod\StardewComforts\obj\Debug\net6.0\StardewComforts.dll
+C:\Users\emmal\OneDrive\Projects\StardewMod\StardewComforts\obj\Debug\net6.0\StardewComforts.sourcelink.json

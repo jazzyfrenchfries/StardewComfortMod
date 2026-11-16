@@ -29,6 +29,7 @@ public class FestivalReminder
             string festivalDate = festival.Key;
             string festivalName = festival.Value;
             int dayStart = festivalDate.Length;
+            
             for (int i = 0; i < festivalDate.Length; i++) {
                 if (char.IsDigit(festivalDate[i])) {
                     dayStart = i;
@@ -38,9 +39,12 @@ public class FestivalReminder
             string festivalSeason = festivalDate.Substring(0, dayStart);
             string festivalDayText = festivalDate.Substring(dayStart);
             int festivalDay = int.Parse(festivalDayText);
-            if (festivalSeason == Game1.currentSeason && festivalDay == Game1.dayOfMonth) {
+            int festivalSeasonIndex = Array.IndexOf(seasons, festivalSeason);
+            int festivalDateInYear = (festivalSeasonIndex* 28) + (festivalDay- 1);
+            int daysUntilFestival = festivalDateInYear - currentDay;
+            if (daysUntilFestival == Config.DaysBeforeReminder) {
                 Game1.addHUDMessage(new HUDMessage(
-                    $"{festivalName} is happening today!",
+                    $"{festivalName} is {daysUntilFestival} days away!",
                     HUDMessage.newQuest_type));
             }
         }

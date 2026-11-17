@@ -5,7 +5,7 @@ using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
 using StardewComforts.Features;
-
+using Leclair.Stardew.BetterGameMenu;
 namespace StardewMod;
 
 public class ModEntry : Mod
@@ -14,7 +14,7 @@ public class ModEntry : Mod
     private EnergyReminder energyReminder;
     private BirthdayReminder birthdayReminder;
     private FestivalReminder festivalReminder;
-    
+    private WeatherReminder weatherReminder;
 
     public override void Entry(IModHelper helper)
     {
@@ -22,6 +22,7 @@ public class ModEntry : Mod
         energyReminder = new EnergyReminder(helper,Config);
         birthdayReminder = new BirthdayReminder(helper,Config, Monitor);
         festivalReminder = new FestivalReminder(helper,Config, Monitor);
+        weatherReminder = new WeatherReminder();
         energyReminder.Initialize();
         birthdayReminder.Initialize();
         festivalReminder.Initialize();
@@ -30,6 +31,12 @@ public class ModEntry : Mod
       
     }
     private void OnGameLaunched(object? sender, GameLaunchedEventArgs e) {
+        var betterGameMenu = Helper.ModRegistry.GetApi<IBetterGameMenuApi>(
+            "leclair.bettergamemenu");
+        if (betterGameMenu == null) {
+            Monitor.Log("Better Game Menu not found!", LogLevel.Warn);
+            return;
+        }
         var configMenu = Helper.ModRegistry.GetApi<IGenericModConfigMenuApi>(
             "spacechase0.GenericModConfigMenu");
         if (configMenu == null) {

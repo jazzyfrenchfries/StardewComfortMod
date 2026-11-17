@@ -5,6 +5,9 @@ using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
 using StardewComforts.Features;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using StardewComforts.Menus;
 using Leclair.Stardew.BetterGameMenu;
 namespace StardewMod;
 
@@ -33,9 +36,23 @@ public class ModEntry : Mod
     private void OnGameLaunched(object? sender, GameLaunchedEventArgs e) {
         var betterGameMenu = Helper.ModRegistry.GetApi<IBetterGameMenuApi>(
             "leclair.bettergamemenu");
-        if (betterGameMenu == null) {
+        if (betterGameMenu != null) {
+            betterGameMenu.RegisterTab(
+            id: "StardewComforts.Weather",
+            order: 165,
+            getDisplayName: () => "Weather",
+            getIcon: () => (DrawWeatherIcon, false),
+            priority: 100,
+            getPageInstance: menu => new WeatherPage(
+                menu.xPositionOnScreen,
+                menu.yPositionOnScreen,
+                menu.width,
+                menu.height,
+                weatherReminder));
+            Monitor.Log("Weather tab registered!", LogLevel.Info);
+        }
+        else {
             Monitor.Log("Better Game Menu not found!", LogLevel.Warn);
-            return;
         }
         var configMenu = Helper.ModRegistry.GetApi<IGenericModConfigMenuApi>(
             "spacechase0.GenericModConfigMenu");
@@ -82,5 +99,31 @@ public class ModEntry : Mod
             interval: 1);
 
         Monitor.Log("Configuration menu registered!", LogLevel.Info);
+    }
+
+    private void DrawWeatherIcon(SpriteBatch batch, Rectangle bounds) {
+        int centerX = bounds.X + bounds.Width / 2;
+        int centerY = bounds.Y + bounds.Height / 2;
+        int size = 8;
+        batch.Draw(
+            Game1.staminaRect,
+            new Rectangle(centerX - size / 2, centerY - size / 2, size, size),
+            Color.Gold);
+        batch.Draw(
+            Game1.staminaRect,
+            new Rectangle(centerX - 1, centerY - 18, 2, 7),
+            Color.Gold);
+        batch.Draw(
+            Game1.staminaRect,
+            new Rectangle(centerX - 1, centerY + 11, 2, 7),
+            Color.Gold);
+        batch.Draw(
+            Game1.staminaRect,
+            new Rectangle(centerX - 18, centerY - 1, 7, 2),
+            Color.Gold);
+        batch.Draw(
+            Game1.staminaRect,
+            new Rectangle(centerX + 11, centerY - 1, 7, 2),
+            Color.Gold);
     }
 }

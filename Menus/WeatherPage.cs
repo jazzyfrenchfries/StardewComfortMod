@@ -23,17 +23,9 @@ public class WeatherPage : IClickableMenu
     }
 
     private string GetWeatherName() {
-        return weatherReminder.tomorrowWeather switch {
-            "Sun" => "Sunny",
-            "Rain" => "Rainy",
-            "Storm" => "Stormy",
-            "Wind" => "Windy",
-            "Snow" => "Snowy",
-            "GreenRain" => "Green Rain",
-            "Festival" => "Festival",
-            "Wedding" => "Wedding",
-            _ => "Unknown"
-        };
+        
+        return weatherReminder.tomorrowWeather;
+
     }
 
     public override void draw(SpriteBatch b) {
